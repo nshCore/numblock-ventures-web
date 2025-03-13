@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const NavBar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -58,32 +58,40 @@ const NavBar: React.FC = () => {
           ))}
         </div>
         
-        {/* Mobile Navigation Toggle */}
-        <button 
-          className="md:hidden text-foreground focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-        >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-      
-      {/* Mobile Navigation Menu */}
-      <div 
-        className={`fixed inset-0 bg-background z-40 flex flex-col items-center justify-center space-y-8 transition-all duration-300 ${
-          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        {navLinks.map((link) => (
-          <a 
-            key={link.name}
-            href={link.href}
-            className="text-xl font-medium text-foreground hover:text-primary transition-colors"
-            onClick={() => setMenuOpen(false)}
-          >
-            {link.name}
-          </a>
-        ))}
+        {/* Mobile Navigation - Using Sheet component for side drawer */}
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <button 
+                className="text-foreground focus:outline-none"
+                aria-label="Open menu"
+              >
+                <Menu size={24} />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[250px] sm:w-[300px] bg-background/95 backdrop-blur-lg">
+              <div className="flex flex-col h-full py-6">
+                <div className="px-4 mb-8">
+                  <span className="text-xl font-bold text-gradient">
+                    <span className="font-mono">Numblock</span>
+                    <span>Ventures</span>
+                  </span>
+                </div>
+                <nav className="flex flex-col space-y-6 px-4">
+                  {navLinks.map((link) => (
+                    <a 
+                      key={link.name}
+                      href={link.href}
+                      className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </nav>
   );
