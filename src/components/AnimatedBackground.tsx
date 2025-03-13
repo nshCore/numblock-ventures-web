@@ -17,11 +17,21 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ className }) =>
     
     let animationFrameId: number;
     let particles: Particle[] = [];
+    let mousePosition = {
+      x: canvas.width / 2,
+      y: canvas.height / 2
+    };
     
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       initParticles();
+    };
+    
+    // Track mouse movement for interactive particles
+    const updateMousePosition = (e: MouseEvent) => {
+      mousePosition.x = e.clientX;
+      mousePosition.y = e.clientY;
     };
     
     class Particle {
@@ -31,6 +41,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ className }) =>
       speedX: number;
       speedY: number;
       opacity: number;
+      color: string;
       
       constructor() {
         this.x = Math.random() * canvas.width;
@@ -39,11 +50,26 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ className }) =>
         this.speedX = (Math.random() - 0.5) * 0.5;
         this.speedY = (Math.random() - 0.5) * 0.5;
         this.opacity = Math.random() * 0.5 + 0.1;
+        
+        // Add color variation
+        const colors = ['rgba(99, 102, 241, opacity)', 'rgba(79, 70, 229, opacity)', 'rgba(67, 56, 202, opacity)'];
+        this.color = colors[Math.floor(Math.random() * colors.length)].replace('opacity', this.opacity.toString());
       }
       
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
+        
+        // Interact with mouse position
+        const dx = mousePosition.x - this.x;
+        const dy = mousePosition.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 100) {
+          // Slightly repel particles from mouse
+          this.x -= dx * 0.01;
+          this.y -= dy * 0.01;
+        }
         
         if (this.x > canvas.width) this.x = 0;
         else if (this.x < 0) this.x = canvas.width;
@@ -54,7 +80,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ className }) =>
       
       draw() {
         if (!ctx) return;
-        ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity})`;
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -63,7 +89,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ className }) =>
     
     function initParticles() {
       particles = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
+      const particleCount = Math.floor((canvas.width * canvas.height) / 12000); // Increase density
       
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
@@ -82,7 +108,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ className }) =>
           
           if (distance < maxDistance) {
             const opacity = 1 - (distance / maxDistance);
-            ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * 0.2})`;
+            ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * 0.3})`; // Slightly more vibrant
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -93,9 +119,29 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ className }) =>
       }
     }
     
+    function drawGradient() {
+      // Add subtle gradient to the background
+      if (!ctx) return;
+      const gradient = ctx.createRadialGradient(
+        canvas.width / 2, 
+        canvas.height / 2, 
+        0, 
+        canvas.width / 2, 
+        canvas.height / 2, 
+        canvas.width / 2
+      );
+      gradient.addColorStop(0, 'rgba(99, 102, 241, 0.05)');
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    
     function animate() {
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      drawGradient();
       
       particles.forEach(particle => {
         particle.update();
@@ -107,11 +153,13 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ className }) =>
     }
     
     window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', updateMousePosition);
     resize();
     animate();
     
     return () => {
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', updateMousePosition);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

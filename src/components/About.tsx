@@ -3,16 +3,16 @@ import React from 'react';
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-24 bg-gradient-to-b from-background to-background/80">
+    <section id="about" className="py-24 bg-gradient-to-b from-secondary/30 to-background/90">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 opacity-0 animate-slide-up">About Numblock Ventures</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 opacity-0 animate-slide-up">About Nublock Ventures</h2>
             
             <div className="opacity-0 animate-slide-up animate-delay-100">
               <h3 className="text-xl font-semibold mb-2 text-primary">Our Mission</h3>
               <p className="text-muted-foreground">
-                At Numblock Ventures, our mission is to empower visionary entrepreneurs in the fields of 
+                At Nublock Ventures, our mission is to empower visionary entrepreneurs in the fields of 
                 technology, SaaS, Web3, AI, and blockchain by providing strategic investment, mentorship, 
                 and cutting-edge resources. We are committed to helping startups develop transformative 
                 solutions, scale rapidly, and create lasting impact through innovation, collaboration, 
@@ -23,10 +23,10 @@ const About: React.FC = () => {
             <div className="opacity-0 animate-slide-up animate-delay-200">
               <h3 className="text-xl font-semibold mb-2 text-primary">Our History</h3>
               <p className="text-muted-foreground">
-                Founded in 2021 by tech entrepreneurs John Numblock and Sarah Chen, Numblock Ventures 
+                Founded in 2021 by tech entrepreneurs John Nublock and Sarah Chen, Nublock Ventures 
                 emerged from a shared vision to bridge the gap between innovative ideas and sustainable 
                 business growth. With over 20 years of combined experience in technology startups and 
-                venture capital, our founders have built Numblock Ventures into a leading force in 
+                venture capital, our founders have built Nublock Ventures into a leading force in 
                 early-stage technology investment.
               </p>
             </div>
@@ -40,7 +40,7 @@ const About: React.FC = () => {
                   <span className="font-mono text-xl font-bold text-primary">JN</span>
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold">John Numblock</h4>
+                  <h4 className="text-lg font-bold">John Nublock</h4>
                   <p className="text-muted-foreground">Co-Founder & Managing Partner</p>
                 </div>
               </div>

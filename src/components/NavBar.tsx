@@ -42,7 +42,7 @@ const NavBar: React.FC = () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
-          <span className="font-mono">{ }Numblock</span>
+          <span className="font-mono">{ }Nublock</span>
           <span>Ventures</span>
         </a>
         
@@ -74,7 +74,7 @@ const NavBar: React.FC = () => {
               <div className="flex flex-col h-full py-6">
                 <div className="px-4 mb-8">
                   <span className="text-xl font-bold text-gradient">
-                    <span className="font-mono">Numblock</span>
+                    <span className="font-mono">Nublock</span>
                     <span>Ventures</span>
                   </span>
                 </div>

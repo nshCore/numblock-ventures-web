@@ -1,9 +1,10 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   useEffect(() => {
     const handleScroll = () => {
@@ -17,8 +18,20 @@ const Hero: React.FC = () => {
       }
     };
     
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) - 0.5,
+        y: (e.clientY / window.innerHeight) - 0.5
+      });
+    };
+    
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
   
   return (
@@ -27,9 +40,31 @@ const Hero: React.FC = () => {
         className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10"
       />
       
+      {/* Floating particles effect */}
+      <div className="absolute inset-0 z-0">
+        {Array.from({ length: 20 }).map((_, index) => (
+          <div
+            key={index}
+            className="absolute w-2 h-2 rounded-full bg-primary/30 animate-float"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${6 + Math.random() * 10}s`,
+              transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px)`,
+              transition: 'transform 0.2s ease-out'
+            }}
+          />
+        ))}
+      </div>
+      
       <div 
         className="relative z-20 text-center px-6 max-w-4xl mx-auto"
         ref={heroRef}
+        style={{
+          transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)`,
+          transition: 'transform 0.2s ease-out'
+        }}
       >
         <h1 className="text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-fade-in" style={{ animationDelay: '200ms' }}>
           Empowering <br />
@@ -57,7 +92,7 @@ const Hero: React.FC = () => {
       </div>
       
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce opacity-80">
-        <a href="#services" aria-label="Scroll down">
+        <a href="#about" aria-label="Scroll down">
           <ArrowDown size={28} />
         </a>
       </div>

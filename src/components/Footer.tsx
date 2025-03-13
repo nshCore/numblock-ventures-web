@@ -13,29 +13,29 @@ const Footer: React.FC = () => {
 
   const privacyContent = `
     <h3 class="text-lg font-semibold mb-4">Privacy Policy</h3>
-    <p class="mb-3">Numblock Ventures is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or communicate with us.</p>
+    <p class="mb-3">Nublock Ventures is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or communicate with us.</p>
     <p class="mb-3">We collect personal information such as your name, email address, and company details when you voluntarily submit them through our website forms. This information is used to respond to your inquiries, provide the services you request, and improve our offerings.</p>
     <p class="mb-3">We do not sell, trade, or otherwise transfer your personally identifiable information to third parties without your consent, except as required to provide services or as required by law.</p>
     <p class="mb-3">Our website may use cookies to enhance your experience and collect information about how you interact with our site. You may choose to disable cookies through your browser settings.</p>
-    <p>If you have any questions regarding this privacy policy, you may contact us at privacy@numblockventures.com.</p>
+    <p>If you have any questions regarding this privacy policy, you may contact us at privacy@nublockventures.com.</p>
   `;
 
   const termsContent = `
     <h3 class="text-lg font-semibold mb-4">Terms of Service</h3>
-    <p class="mb-3">By accessing and using the Numblock Ventures website, you accept and agree to be bound by these Terms of Service.</p>
-    <p class="mb-3">All content on this website is the property of Numblock Ventures and is protected by copyright laws. You may not reproduce, distribute, or create derivative works without our express consent.</p>
+    <p class="mb-3">By accessing and using the Nublock Ventures website, you accept and agree to be bound by these Terms of Service.</p>
+    <p class="mb-3">All content on this website is the property of Nublock Ventures and is protected by copyright laws. You may not reproduce, distribute, or create derivative works without our express consent.</p>
     <p class="mb-3">The information provided on our website is for general informational purposes only and should not be construed as professional advice. We make no representations or warranties of any kind regarding the accuracy of our content.</p>
     <p class="mb-3">We reserve the right to modify or discontinue any aspect of our website without notice. We will not be liable for any modification, suspension, or discontinuance of the website.</p>
-    <p>By using our website, you agree to indemnify and hold harmless Numblock Ventures from any claims arising from your use of the site or violation of these terms.</p>
+    <p>By using our website, you agree to indemnify and hold harmless Nublock Ventures from any claims arising from your use of the site or violation of these terms.</p>
   `;
 
   const cookiesContent = `
     <h3 class="text-lg font-semibold mb-4">Cookie Policy</h3>
-    <p class="mb-3">Numblock Ventures uses cookies to enhance your browsing experience on our website. Cookies are small text files that are stored on your device to collect standard internet log information and visitor behavior information.</p>
+    <p class="mb-3">Nublock Ventures uses cookies to enhance your browsing experience on our website. Cookies are small text files that are stored on your device to collect standard internet log information and visitor behavior information.</p>
     <p class="mb-3">We use essential cookies that are necessary for the website to function properly, as well as analytics cookies that help us understand how you interact with our website and allow us to improve your experience.</p>
     <p class="mb-3">You can control and manage cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of our website.</p>
     <p class="mb-3">By continuing to use our website, you consent to our use of cookies as described in this policy.</p>
-    <p>For more information about the cookies we use, please contact us at cookies@numblockventures.com.</p>
+    <p>For more information about the cookies we use, please contact us at cookies@nublockventures.com.</p>
   `;
 
   return (
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
             <a href="#" className="text-2xl font-bold text-gradient mb-4 inline-block">
-              <span className="font-mono">{ }Numblock</span>
+              <span className="font-mono">{ }Nublock</span>
               <span>Ventures</span>
             </a>
             <p className="text-muted-foreground mb-6 max-w-md">
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
                 <Github size={20} />
               </a>
               <a 
-                href="mailto:info@numblockventures.com" 
+                href="mailto:info@nublockventures.com" 
                 className="text-foreground/70 hover:text-primary transition-colors"
                 aria-label="Email"
               >
@@ -145,7 +145,7 @@ const Footer: React.FC = () => {
         
         <div className="border-t border-border/50 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} Numblock Ventures. All rights reserved.
+            © {new Date().getFullYear()} Nublock Ventures. All rights reserved.
           </p>
         </div>
       </div>
