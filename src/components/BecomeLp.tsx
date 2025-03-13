@@ -1,39 +1,31 @@
 
-import React, { useState, useRef } from 'react';
-import { Send, X, Upload } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, X } from 'lucide-react';
 import { toast } from 'sonner';
 
-const ApplyButton: React.FC = () => {
+const BecomeLp: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     company: '',
     website: '',
+    email: '',
     phone: '',
-    description: ''
+    amount: ''
   });
   const [loading, setLoading] = useState(false);
-  const [fileName, setFileName] = useState('');
-  const fileInputRef = useRef<HTMLInputElement>(null);
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
   
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
-    }
-  };
-  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.email || !formData.company || !formData.description) {
+    if (!formData.name || !formData.email || !formData.amount) {
       toast.error('Please fill out all required fields.');
       return;
     }
@@ -42,24 +34,34 @@ const ApplyButton: React.FC = () => {
     
     // Simulate API call
     setTimeout(() => {
-      toast.success('Your application has been submitted!');
-      setFormData({ name: '', email: '', company: '', website: '', phone: '', description: '' });
-      setFileName('');
+      toast.success('Your LP application has been submitted!');
+      setFormData({ name: '', company: '', website: '', email: '', phone: '', amount: '' });
       setIsOpen(false);
       setLoading(false);
     }, 1500);
   };
   
   return (
-    <>
-      <button 
-        className="fixed bottom-8 right-8 z-40 bg-primary text-white rounded-full p-6 shadow-glow animate-pulse-slow hover:animate-none hover:bg-primary/90 transition-colors flex items-center justify-center"
-        onClick={() => setIsOpen(true)}
-        aria-label="Apply for funding"
-      >
-        <Send size={28} />
-        <span className="ml-2 font-medium hidden sm:inline">Apply Now</span>
-      </button>
+    <section id="become-lp" className="py-24 bg-primary/5">
+      <div className="container mx-auto px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 opacity-0 animate-slide-up">Become a Limited Partner</h2>
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto opacity-0 animate-slide-up animate-delay-100">
+            Join Numblock Ventures as a Limited Partner and gain access to our portfolio of cutting-edge startups in technology, SaaS, Web3, AI, and blockchain sectors.
+          </p>
+          <p className="text-muted-foreground mb-8 opacity-0 animate-slide-up animate-delay-200">
+            As an LP with Numblock Ventures, you'll benefit from our team's deep expertise in identifying high-potential startups, rigorous due diligence process, and hands-on approach to helping portfolio companies scale. Our focus on emerging technologies positions our partners for significant returns as these sectors continue to transform industries globally.
+          </p>
+          
+          <button 
+            onClick={() => setIsOpen(true)}
+            className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg px-8 py-4 font-medium transition-all hover:shadow-glow mt-4 flex items-center justify-center gap-2 mx-auto opacity-0 animate-slide-up animate-delay-300"
+          >
+            <span>Apply to Become an LP</span>
+            <ArrowRight size={18} />
+          </button>
+        </div>
+      </div>
       
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -80,9 +82,9 @@ const ApplyButton: React.FC = () => {
             </button>
             
             <div className="p-8">
-              <h3 className="text-2xl font-bold mb-2">Submit Your Pitch</h3>
+              <h3 className="text-2xl font-bold mb-2">Become a Limited Partner</h3>
               <p className="text-muted-foreground mb-6">
-                Tell us about your startup and we'll get back to you soon.
+                Join us in backing the next generation of tech innovation.
               </p>
               
               <form onSubmit={handleSubmit}>
@@ -103,21 +105,7 @@ const ApplyButton: React.FC = () => {
                   
                   <div>
                     <label className="block text-sm font-medium mb-1">
-                      Email Address <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      className="w-full px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Company Name <span className="text-red-500">*</span>
+                      Company
                     </label>
                     <input
                       type="text"
@@ -125,7 +113,6 @@ const ApplyButton: React.FC = () => {
                       className="w-full px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                       value={formData.company}
                       onChange={handleChange}
-                      required
                     />
                   </div>
                   
@@ -145,6 +132,20 @@ const ApplyButton: React.FC = () => {
                   
                   <div>
                     <label className="block text-sm font-medium mb-1">
+                      Email Address <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      className="w-full px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
                       Phone Number
                     </label>
                     <input
@@ -158,34 +159,16 @@ const ApplyButton: React.FC = () => {
                   
                   <div>
                     <label className="block text-sm font-medium mb-1">
-                      Pitch Deck
+                      Investment Amount ($) <span className="text-red-500">*</span>
                     </label>
-                    <div 
-                      className="w-full px-4 py-3 bg-card border border-border rounded-lg flex items-center cursor-pointer hover:bg-muted/40 transition-colors"
-                      onClick={() => fileInputRef.current?.click()}
-                    >
-                      <Upload size={18} className="mr-2 text-muted-foreground" />
-                      <span className="text-muted-foreground">{fileName || 'Upload pitch deck (PDF or PPT)'}</span>
-                      <input 
-                        type="file" 
-                        ref={fileInputRef}
-                        className="hidden" 
-                        accept=".pdf,.ppt,.pptx"
-                        onChange={handleFileChange}
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Brief Description <span className="text-red-500">*</span>
-                    </label>
-                    <textarea
-                      name="description"
-                      rows={4}
-                      className="w-full px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
-                      value={formData.description}
+                    <input
+                      type="number"
+                      name="amount"
+                      className="w-full px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      value={formData.amount}
                       onChange={handleChange}
+                      placeholder="Minimum investment: $250,000"
+                      min="1"
                       required
                     />
                   </div>
@@ -199,8 +182,8 @@ const ApplyButton: React.FC = () => {
                       <span className="animate-pulse">Submitting...</span>
                     ) : (
                       <>
-                        <span>Submit Application</span>
-                        <Send size={16} />
+                        <span>Submit LP Application</span>
+                        <ArrowRight size={16} />
                       </>
                     )}
                   </button>
@@ -210,8 +193,8 @@ const ApplyButton: React.FC = () => {
           </div>
         </div>
       )}
-    </>
+    </section>
   );
 };
 
-export default ApplyButton;
+export default BecomeLp;

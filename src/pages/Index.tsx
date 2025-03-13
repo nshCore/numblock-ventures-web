@@ -8,6 +8,7 @@ import Stats from '@/components/Stats';
 import Portfolio from '@/components/Portfolio';
 import Newsletter from '@/components/Newsletter';
 import FAQ from '@/components/FAQ';
+import BecomeLp from '@/components/BecomeLp';
 import Footer from '@/components/Footer';
 import ApplyButton from '@/components/ApplyButton';
 import AnimatedBackground from '@/components/AnimatedBackground';
@@ -49,6 +50,7 @@ const Index = () => {
       <Portfolio />
       <Newsletter />
       <FAQ />
+      <BecomeLp />
       <Footer />
       <ApplyButton />
     </div>
