@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
             <a href="#" className="text-2xl font-bold text-gradient mb-4 inline-block">
-              <span className="font-mono">{}NB</span>
+              <span className="font-mono">Nublock</span>
               <span>Ventures</span>
             </a>
             <p className="text-muted-foreground mb-6 max-w-md">
