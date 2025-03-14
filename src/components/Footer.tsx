@@ -120,7 +120,7 @@ const Footer: React.FC = () => {
         
         <div className="border-t border-border/50 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-muted-foreground text-sm mb-4 md:mb-0">
-            <p className="mb-2">
+            <p>
               © {new Date().getFullYear()} <a 
                 href="https://registry.smartformations.ai/#/business/21" 
                 target="_blank" 
@@ -128,9 +128,7 @@ const Footer: React.FC = () => {
                 className="hover:text-primary transition-colors"
               >
                 NB Ventures LLC
-              </a>. All rights reserved.
-            </p>
-            <p>
+              </a>. All rights reserved.{" "}
               <a 
                 href="https://nublock.holdings" 
                 target="_blank" 
