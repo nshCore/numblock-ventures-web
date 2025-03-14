@@ -35,6 +35,10 @@ jobs:
 
       - name: Copy build output from dist to docs
         run: |
+          rm -Rf docs/*
+          rm -Rf docs/.*
+          rm -Rf docs
+          mkdir -p docs
           cp -r dist/. docs/
           ls -la docs
 
