@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -217,11 +218,12 @@ const Portfolio: React.FC = () => {
           </p>
         </div>
         
-        {/* Category Filters */}
+        {/* Combined Filters */}
         <div className="flex flex-wrap justify-center gap-3 mb-10 opacity-0 animate-slide-up animate-delay-300">
-          {categories.map((category, index) => (
+          {/* Category Filters */}
+          {categories.map((category) => (
             <Button
-              key={category}
+              key={`category-${category}`}
               variant={activeFilter === category ? "default" : "outline"}
               className="rounded-full capitalize"
               onClick={() => {
@@ -232,13 +234,11 @@ const Portfolio: React.FC = () => {
               {category}
             </Button>
           ))}
-        </div>
-        
-        {/* Tag Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10 opacity-0 animate-slide-up animate-delay-400">
+          
+          {/* Tag Filters */}
           {tags.map((tag) => (
             <Badge
-              key={tag}
+              key={`tag-${tag}`}
               variant={activeFilter === tag ? "default" : "outline"}
               className="px-3 py-1.5 cursor-pointer capitalize"
               onClick={() => {
