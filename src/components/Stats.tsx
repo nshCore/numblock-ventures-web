@@ -6,6 +6,7 @@ const Stats: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   
   const stats = [
+    { value: '$50M', label: 'Total Amount Raised', suffix: '+' },
     { value: '45', label: 'Portfolio Companies', suffix: '+' },
     { value: '3', label: 'Successful Exits', suffix: '' },
     { value: '85', label: 'Global Partners', suffix: '+' }
