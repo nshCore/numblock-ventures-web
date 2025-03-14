@@ -46,9 +46,7 @@ const BecomeLp: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 opacity-0 animate-slide-up">Become a Liquidity Provider
         </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto opacity-0 animate-slide-up animate-delay-100">
-            Join Numblock Ventures as a Limited Partner and gain access to our portfolio of cutting-edge startups in technology, SaaS, Web3, AI, and blockchain sectors.
-          </p>
+          
           <p className="text-muted-foreground mb-8 opacity-0 animate-slide-up animate-delay-200">Partner with Numblock Ventures by providing liquidity through a convertible loan note and empower our portfolio of innovative startups in technology, SaaS, Web3, AI, and blockchain. As a liquidity provider, your capital supports groundbreaking ventures while offering the potential for equity conversion and attractive returns. Leverage our deep industry expertise, rigorous investment process, and commitment to nurturing growth in emerging technologies. Join us today and fuel the future of innovation.</p>
           
           <button onClick={() => setIsOpen(true)} className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg px-8 py-4 font-medium transition-all hover:shadow-glow mt-4 flex items-center justify-center gap-2 mx-auto opacity-0 animate-slide-up animate-delay-300">
