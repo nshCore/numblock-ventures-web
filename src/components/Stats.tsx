@@ -6,9 +6,8 @@ const Stats: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   
   const stats = [
-    { value: '$50M', label: 'Assets Under Management', suffix: '+' },
     { value: '45', label: 'Portfolio Companies', suffix: '+' },
-    { value: '12', label: 'Successful Exits', suffix: '' },
+    { value: '3', label: 'Successful Exits', suffix: '' },
     { value: '85', label: 'Global Partners', suffix: '+' }
   ];
   
