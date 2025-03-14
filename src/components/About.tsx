@@ -23,7 +23,7 @@ const About: React.FC = () => {
             <div className="opacity-0 animate-slide-up animate-delay-200">
               <h3 className="text-xl font-semibold mb-2 text-primary">Our History</h3>
               <p className="text-muted-foreground">
-                Founded in 2021 by tech entrepreneurs John Nublock and Sarah Chen, Nublock Ventures 
+                Founded in 2021 by tech entrepreneur James Kirkby, Nublock Ventures 
                 emerged from a shared vision to bridge the gap between innovative ideas and sustainable 
                 business growth. With over 20 years of combined experience in technology startups and 
                 venture capital, our founders have built Nublock Ventures into a leading force in 
@@ -37,23 +37,15 @@ const About: React.FC = () => {
             <div className="bg-card rounded-2xl p-8 shadow-soft opacity-0 animate-slide-up animate-delay-300">
               <div className="flex gap-6 mb-6">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                  <span className="font-mono text-xl font-bold text-primary">JN</span>
+                  <span className="font-mono text-xl font-bold text-primary">JK</span>
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold">John Nublock</h4>
-                  <p className="text-muted-foreground">Co-Founder & Managing Partner</p>
+                  <h4 className="text-lg font-bold">James Kirkby</h4>
+                  <p className="text-muted-foreground">Director</p>
                 </div>
               </div>
               
-              <div className="flex gap-6">
-                <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center">
-                  <span className="font-mono text-xl font-bold text-secondary">SC</span>
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold">Sarah Chen</h4>
-                  <p className="text-muted-foreground">Co-Founder & Investment Director</p>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
