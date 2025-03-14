@@ -35,8 +35,8 @@ jobs:
 
       - name: Copy build output from dist to docs
         run: |
-          mkdir -p docs
           cp -r dist/. docs/
+          ls -la docs
 
       - name: Commit docs output if changed
         run: |
