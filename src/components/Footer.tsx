@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Twitter, Linkedin, Mail, Github, X } from 'lucide-react';
+
 const Footer: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState({
     title: '',
     content: ''
   });
+
   const openModal = (title: string, content: string) => {
     setModalContent({
       title,
@@ -13,6 +15,7 @@ const Footer: React.FC = () => {
     });
     setIsModalOpen(true);
   };
+
   const privacyContent = `
     <h3 class="text-lg font-semibold mb-4">Privacy Policy</h3>
     <p class="mb-3">Nublock Ventures is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or communicate with us.</p>
@@ -21,6 +24,7 @@ const Footer: React.FC = () => {
     <p class="mb-3">Our website may use cookies to enhance your experience and collect information about how you interact with our site. You may choose to disable cookies through your browser settings.</p>
     <p>If you have any questions regarding this privacy policy, you may contact us at privacy@nublockventures.com.</p>
   `;
+
   const termsContent = `
     <h3 class="text-lg font-semibold mb-4">Terms of Service</h3>
     <p class="mb-3">By accessing and using the Nublock Ventures website, you accept and agree to be bound by these Terms of Service.</p>
@@ -29,6 +33,7 @@ const Footer: React.FC = () => {
     <p class="mb-3">We reserve the right to modify or discontinue any aspect of our website without notice. We will not be liable for any modification, suspension, or discontinuance of the website.</p>
     <p>By using our website, you agree to indemnify and hold harmless Nublock Ventures from any claims arising from your use of the site or violation of these terms.</p>
   `;
+
   const cookiesContent = `
     <h3 class="text-lg font-semibold mb-4">Cookie Policy</h3>
     <p class="mb-3">Nublock Ventures uses cookies to enhance your browsing experience on our website. Cookies are small text files that are stored on your device to collect standard internet log information and visitor behavior information.</p>
@@ -37,12 +42,13 @@ const Footer: React.FC = () => {
     <p class="mb-3">By continuing to use our website, you consent to our use of cookies as described in this policy.</p>
     <p>For more information about the cookies we use, please contact us at cookies@nublockventures.com.</p>
   `;
+
   return <footer className="bg-secondary/50 pt-20 pb-10">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
             <a href="#" className="text-2xl font-bold text-gradient mb-4 inline-block">
-              <span className="font-mono">{}Nublock</span>
+              <span className="font-mono">{}NB</span>
               <span>Ventures</span>
             </a>
             <p className="text-muted-foreground mb-6 max-w-md">
@@ -113,9 +119,28 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="border-t border-border/50 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-muted-foreground text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} Nublock Ventures. All rights reserved.
-          </p>
+          <div className="text-muted-foreground text-sm mb-4 md:mb-0">
+            <p className="mb-2">
+              © {new Date().getFullYear()} <a 
+                href="https://registry.smartformations.ai/#/business/21" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                NB Ventures LLC
+              </a>. All rights reserved.
+            </p>
+            <p>
+              <a 
+                href="https://nublock.holdings" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                Part of the Nublock Group
+              </a>
+            </p>
+          </div>
         </div>
       </div>
 
@@ -138,4 +163,5 @@ const Footer: React.FC = () => {
         </div>}
     </footer>;
 };
+
 export default Footer;
