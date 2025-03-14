@@ -1,36 +1,46 @@
-name: Build and Deploy to GitHub Pages
+name: Build and Commit Build Output
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
 
 jobs:
-  build-deploy:
+  build-and-commit:
+    # Run only if not a PR event or the PR was merged.
+    if: github.event.pull_request == null || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
-      # Check out the repository code
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          # Ensure full history so git can properly commit and push changes.
+          fetch-depth: 0
 
-      # Set up Node.js environment with Node v22.14.0
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22.14.0'
+          node-version: '22'
 
-      # Install dependencies using npm ci for a clean install
       - name: Install dependencies
         run: npm ci
 
-      # Build the React project
       - name: Build project
         run: npm run build
 
-      # Deploy build folder to GitHub Pages using the gh-pages branch
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+      - name: Commit build output if changed
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add build
+          if git diff-index --quiet HEAD --; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update build output [skip ci]"
+            git push origin HEAD:${{ github.ref }}
+          fi
