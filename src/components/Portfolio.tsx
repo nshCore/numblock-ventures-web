@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -41,7 +40,7 @@ const Portfolio: React.FC = () => {
       tags: ['ai', 'real estate', 'saas'],
       website: '#',
       year: 2023,
-      details: 'Introducing Rental Master AI, your ultimate SaaS solution for rental property management. Say goodbye to the hassles of manual tasks – with Rental Master AI, users can effortlessly generate their own websites for rental properties. Powered by AI, our platform creates high-converting sales copy, manages contracts, facilitates guest check-ins, and handles payments with ease. From streamlining operations to maximizing efficiency, Rental Master AI empowers landlords worldwide to elevate their rental businesses to new heights.'
+      details: "Introducing Rental Master AI, your ultimate SaaS solution for rental property management. Say goodbye to the hassles of manual tasks – with Rental Master AI, users can effortlessly generate their own websites for rental properties. Powered by AI, our platform creates high-converting sales copy, manages contracts, facilitates guest check-ins, and handles payments with ease. From streamlining operations to maximizing efficiency, Rental Master AI empowers landlords worldwide to elevate their rental businesses to new heights."
     },
     {
       id: 2,
@@ -52,7 +51,7 @@ const Portfolio: React.FC = () => {
       tags: ['ai', 'real estate', 'blockchain', 'tokenisation', 'web3'],
       website: '#',
       year: 2022,
-      details: 'Introducing MiCasaDAO, a groundbreaking web project revolutionizing real estate investment. With MiCasaDAO, individuals can tokenize income-producing short-term holiday rental properties, democratizing access to lucrative real estate opportunities. Through blockchain technology, investors can securely own fractions of properties, diversifying their portfolio with ease. Say goodbye to barriers of entry – MiCasaDAO opens the doors to global real estate investment, empowering everyone to participate in the wealth of the property market.'
+      details: "Introducing MiCasaDAO, a groundbreaking web project revolutionizing real estate investment. With MiCasaDAO, individuals can tokenize income-producing short-term holiday rental properties, democratizing access to lucrative real estate opportunities. Through blockchain technology, investors can securely own fractions of properties, diversifying their portfolio with ease. Say goodbye to barriers of entry – MiCasaDAO opens the doors to global real estate investment, empowering everyone to participate in the wealth of the property market."
     },
     {
       id: 3,
@@ -63,7 +62,7 @@ const Portfolio: React.FC = () => {
       tags: ['ai', 'ecom', 'saas'],
       website: '#',
       year: 2023,
-      details: 'Introducing FoodStoreAI, your ultimate solution for launching a successful online restaurant ordering website. With FoodStoreAI, anyone can effortlessly create a stunning platform tailored to their culinary venture. Powered by cutting-edge AI technology, FoodStoreAI generates high-converting sales copy and captivating images, ensuring your menu delights and entices customers. Say goodbye to the hassle of website design – FoodStoreAI empowers restaurateurs to showcase their offerings with style and sophistication, driving sales and satisfaction with every click.'
+      details: "Introducing FoodStoreAI, your ultimate solution for launching a successful online restaurant ordering website. With FoodStoreAI, anyone can effortlessly create a stunning platform tailored to their culinary venture. Powered by cutting-edge AI technology, FoodStoreAI generates high-converting sales copy and captivating images, ensuring your menu delights and entices customers. Say goodbye to the hassle of website design – FoodStoreAI empowers restaurateurs to showcase their offerings with style and sophistication, driving sales and satisfaction with every click."
     },
     {
       id: 4,
@@ -74,7 +73,7 @@ const Portfolio: React.FC = () => {
       tags: ['hosting', 'cloud solutions'],
       website: '#',
       year: 2022,
-      details: 'Introducing Deployer Host, the ultimate provisioning tool for developers on the fast track to shipping products. Designed around DevOps best practices, Deployer Host offers seamless environment provisioning, including dev/stage and production setups. With one-click deployment, developers can effortlessly push their creations from development to production, minimizing deployment headaches and maximizing productivity. Say goodbye to wasted time on setup and configuration – with Deployer Host, developers can focus on what they do best: building exceptional products.'
+      details: "Introducing Deployer Host, the ultimate provisioning tool for developers on the fast track to shipping products. Designed around DevOps best practices, Deployer Host offers seamless environment provisioning, including dev/stage and production setups. With one-click deployment, developers can effortlessly push their creations from development to production, minimizing deployment headaches and maximizing productivity. Say goodbye to wasted time on setup and configuration – with Deployer Host, developers can focus on what they do best: building exceptional products."
     },
     {
       id: 5,
@@ -85,7 +84,7 @@ const Portfolio: React.FC = () => {
       tags: ['ai', 'ecom', 'saas'],
       website: '#',
       year: 2023,
-      details: 'Introducing EcomStoreAI, your ultimate solution for launching a successful online ecommerce website. Powered by state-of-the-art AI technology, EcomStoreAI empowers users to effortlessly create stunning platforms that drive conversions. Say goodbye to the guesswork of sales copy and imagery – EcomStoreAI generates high-converting sales copy and captivating images tailored to your products and brand. With EcomStoreAI, anyone can build a professional ecommerce website that stands out in the crowded online marketplace. Unlock the power of AI and elevate your online store with EcomStoreAI.'
+      details: "Introducing EcomStoreAI, your ultimate solution for launching a successful online ecommerce website. Powered by state-of-the-art AI technology, EcomStoreAI empowers users to effortlessly create stunning platforms that drive conversions. Say goodbye to the guesswork of sales copy and imagery – EcomStoreAI generates high-converting sales copy and captivating images tailored to your products and brand. With EcomStoreAI, anyone can build a professional ecommerce website that stands out in the crowded online marketplace. Unlock the power of AI and elevate your online store with EcomStoreAI."
     },
     {
       id: 6,
@@ -96,7 +95,7 @@ const Portfolio: React.FC = () => {
       tags: ['web3', 'blockchain', 'cyber security'],
       website: '#',
       year: 2022,
-      details: 'Introducing Audik Dev, your premier cybersecurity partner specializing in auditing smart contracts and Web3 project code and infrastructure. With expertise in blockchain technology and cybersecurity, Audik Dev provides comprehensive audits to ensure the integrity and security of your projects. From scrutinizing smart contract logic to assessing network infrastructure, our team employs rigorous testing methodologies to identify vulnerabilities and mitigate risks. Trust Audik Dev to safeguard your digital assets and reputation in the rapidly evolving landscape of decentralized finance and Web3 applications.'
+      details: "Introducing Audik Dev, your premier cybersecurity partner specializing in auditing smart contracts and Web3 project code and infrastructure. With expertise in blockchain technology and cybersecurity, Audik Dev provides comprehensive audits to ensure the integrity and security of your projects. From scrutinizing smart contract logic to assessing network infrastructure, our team employs rigorous testing methodologies to identify vulnerabilities and mitigate risks. Trust Audik Dev to safeguard your digital assets and reputation in the rapidly evolving landscape of decentralized finance and Web3 applications."
     },
     {
       id: 7,
@@ -107,7 +106,7 @@ const Portfolio: React.FC = () => {
       tags: ['web3', 'blockchain'],
       website: '#',
       year: 2022,
-      details: 'Introducing SnapShot.ing, the game-changing platform revolutionizing user management for blockchain projects. Say goodbye to cumbersome spreadsheets and manual data parsing – with SnapShot.ing, project owners can effortlessly capture snapshots of users from smart contracts based on customizable input parameters. Whether it's for airdrops, rewards, or community engagement initiatives, SnapShot.ing streamlines the process, allowing project owners to build lists of users with ease. Simplify your workflow and maximize efficiency – choose SnapShot.ing for seamless user management in the decentralized era.'
+      details: "Introducing SnapShot.ing, the game-changing platform revolutionizing user management for blockchain projects. Say goodbye to cumbersome spreadsheets and manual data parsing – with SnapShot.ing, project owners can effortlessly capture snapshots of users from smart contracts based on customizable input parameters. Whether it's for airdrops, rewards, or community engagement initiatives, SnapShot.ing streamlines the process, allowing project owners to build lists of users with ease. Simplify your workflow and maximize efficiency – choose SnapShot.ing for seamless user management in the decentralized era."
     },
     {
       id: 8,
@@ -118,7 +117,7 @@ const Portfolio: React.FC = () => {
       tags: ['web3', 'blockchain', 'defi', 'ai'],
       website: '#',
       year: 2023,
-      details: 'Introducing DeFi Index AI, your gateway to personalized index funds of digital assets, powered by cutting-edge artificial intelligence. With DeFi Index AI, users can curate their own portfolios with ease, selecting from a wide range of digital assets. Our powerful AI algorithm handles the heavy lifting, automatically rebalancing portfolios to optimize performance and mitigate risk. Say goodbye to emotional trading – DeFi Index AI empowers users to invest with confidence, leveraging data-driven insights for long-term success in the dynamic world of decentralized finance.'
+      details: "Introducing DeFi Index AI, your gateway to personalized index funds of digital assets, powered by cutting-edge artificial intelligence. With DeFi Index AI, users can curate their own portfolios with ease, selecting from a wide range of digital assets. Our powerful AI algorithm handles the heavy lifting, automatically rebalancing portfolios to optimize performance and mitigate risk. Say goodbye to emotional trading – DeFi Index AI empowers users to invest with confidence, leveraging data-driven insights for long-term success in the dynamic world of decentralized finance."
     },
     {
       id: 9,
@@ -129,7 +128,7 @@ const Portfolio: React.FC = () => {
       tags: ['web3', 'blockchain', 'defi', 'ai'],
       website: '#',
       year: 2022,
-      details: 'Introducing DeFi Desktop, your all-in-one solution for decentralized finance on your desktop. With DeFi Desktop, users can seamlessly connect to multiple DeFi networks across different chains, managing their portfolios with ease. But that's not all – DeFi Desktop's extensible nature empowers developers to create custom plugins for DeFi strategies, enabling endless possibilities for optimizing and automating financial activities. Say hello to a new era of decentralized finance accessibility and innovation – with DeFi Desktop, your DeFi journey starts here.'
+      details: "Introducing DeFi Desktop, your all-in-one solution for decentralized finance on your desktop. With DeFi Desktop, users can seamlessly connect to multiple DeFi networks across different chains, managing their portfolios with ease. But that's not all – DeFi Desktop's extensible nature empowers developers to create custom plugins for DeFi strategies, enabling endless possibilities for optimizing and automating financial activities. Say hello to a new era of decentralized finance accessibility and innovation – with DeFi Desktop, your DeFi journey starts here."
     },
     {
       id: 10,
@@ -140,7 +139,7 @@ const Portfolio: React.FC = () => {
       tags: ['web3', 'blockchain', 'saas', 'business tools'],
       website: '#',
       year: 2023,
-      details: 'Introducing Company Creator AI, your indispensable tool for crafting the optimal corporate structure tailored to your business sector. Whether you're diving into real estate with SPVs or venturing into the realm of multinational ecommerce, Company Creator harnesses the power of AI to guide founders in sculpting the ideal legal framework. Drawing on a vast repository of worldwide regulations and industry insights, Company Creator ensures efficiency and compliance every step of the way. Say hello to seamless corporate structuring – with Company Creator AI, founders can embark on their entrepreneurial journey with confidence and clarity.'
+      details: "Introducing Company Creator AI, your indispensable tool for crafting the optimal corporate structure tailored to your business sector. Whether you're diving into real estate with SPVs or venturing into the realm of multinational ecommerce, Company Creator harnesses the power of AI to guide founders in sculpting the ideal legal framework. Drawing on a vast repository of worldwide regulations and industry insights, Company Creator ensures efficiency and compliance every step of the way. Say hello to seamless corporate structuring – with Company Creator AI, founders can embark on their entrepreneurial journey with confidence and clarity."
     },
     {
       id: 11,
@@ -151,7 +150,7 @@ const Portfolio: React.FC = () => {
       tags: ['accounting', 'crm', 'ai', 'fintech', 'saas'],
       website: '#',
       year: 2023,
-      details: 'SmartAccounts.ai is a cutting-edge AI-powered accounting and banking platform designed to streamline financial operations for businesses of all sizes. Leveraging advanced machine learning algorithms, the platform automates bookkeeping tasks, reconciles transactions, and provides real-time financial insights with unprecedented accuracy. Beyond traditional accounting, SmartAccounts.ai integrates banking services, enabling seamless money management and financial planning all in one secure ecosystem.'
+      details: "SmartAccounts.ai is a cutting-edge AI-powered accounting and banking platform designed to streamline financial operations for businesses of all sizes. Leveraging advanced machine learning algorithms, the platform automates bookkeeping tasks, reconciles transactions, and provides real-time financial insights with unprecedented accuracy. Beyond traditional accounting, SmartAccounts.ai integrates banking services, enabling seamless money management and financial planning all in one secure ecosystem."
     },
   ];
   
