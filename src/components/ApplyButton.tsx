@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Send, X, Upload } from 'lucide-react';
 import { toast } from 'sonner';
@@ -45,7 +44,9 @@ const ApplyButton: React.FC = () => {
     setLoading(true);
     
     try {
-      // First create the application record
+      console.log('Submitting application form with data:', formData);
+      
+      // First create the application record with explicit status set to 'pending'
       const { data: applicationData, error: applicationError } = await supabase
         .from('lp_applications')
         .insert({
@@ -55,30 +56,25 @@ const ApplyButton: React.FC = () => {
           website: formData.website || null,
           phone: formData.phone || null,
           description: formData.description,
-          file_name: fileName || null
+          file_name: fileName || null,
+          status: 'pending' // Explicitly set status
         })
         .select('id')
         .single();
       
-      if (applicationError) throw applicationError;
+      if (applicationError) {
+        console.error('Error details:', applicationError);
+        throw applicationError;
+      }
+      
+      console.log('Application inserted successfully:', applicationData);
       
       // If there's a file, upload it to storage
       if (file && applicationData) {
         const fileExt = fileName.split('.').pop();
         const filePath = `${applicationData.id}/${Date.now()}.${fileExt}`;
         
-        // Create the storage bucket if it doesn't exist yet (first time setup)
-        const { data: bucketData, error: bucketError } = await supabase
-          .storage
-          .getBucket('applications');
-          
-        if (bucketError && bucketError.message.includes('not found')) {
-          // Create the bucket if it doesn't exist
-          await supabase.storage.createBucket('applications', {
-            public: false,
-            fileSizeLimit: 10485760 // 10MB
-          });
-        }
+        console.log('Uploading file to storage:', filePath);
         
         // Upload the file
         const { error: uploadError } = await supabase
@@ -86,7 +82,12 @@ const ApplyButton: React.FC = () => {
           .from('applications')
           .upload(filePath, file);
         
-        if (uploadError) throw uploadError;
+        if (uploadError) {
+          console.error('File upload error:', uploadError);
+          throw uploadError;
+        }
+        
+        console.log('File uploaded successfully');
         
         // Update the application with the file URL
         const { error: updateError } = await supabase
@@ -94,7 +95,12 @@ const ApplyButton: React.FC = () => {
           .update({ file_url: filePath })
           .eq('id', applicationData.id);
         
-        if (updateError) throw updateError;
+        if (updateError) {
+          console.error('Error updating application with file URL:', updateError);
+          throw updateError;
+        }
+        
+        console.log('Application updated with file URL');
       }
       
       toast.success('Your application has been submitted!');
