@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { Send, X, Upload } from 'lucide-react';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 const ApplyButton: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,7 @@ const ApplyButton: React.FC = () => {
   });
   const [loading, setLoading] = useState(false);
   const [fileName, setFileName] = useState('');
+  const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -26,11 +28,13 @@ const ApplyButton: React.FC = () => {
   
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
+      const selectedFile = e.target.files[0];
+      setFileName(selectedFile.name);
+      setFile(selectedFile);
     }
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.email || !formData.company || !formData.description) {
@@ -40,14 +44,72 @@ const ApplyButton: React.FC = () => {
     
     setLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // First create the application record
+      const { data: applicationData, error: applicationError } = await supabase
+        .from('lp_applications')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          website: formData.website || null,
+          phone: formData.phone || null,
+          description: formData.description,
+          file_name: fileName || null
+        })
+        .select('id')
+        .single();
+      
+      if (applicationError) throw applicationError;
+      
+      // If there's a file, upload it to storage
+      if (file && applicationData) {
+        const fileExt = fileName.split('.').pop();
+        const filePath = `${applicationData.id}/${Date.now()}.${fileExt}`;
+        
+        // Create the storage bucket if it doesn't exist yet (first time setup)
+        const { data: bucketData, error: bucketError } = await supabase
+          .storage
+          .getBucket('applications');
+          
+        if (bucketError && bucketError.message.includes('not found')) {
+          // Create the bucket if it doesn't exist
+          await supabase.storage.createBucket('applications', {
+            public: false,
+            fileSizeLimit: 10485760 // 10MB
+          });
+        }
+        
+        // Upload the file
+        const { error: uploadError } = await supabase
+          .storage
+          .from('applications')
+          .upload(filePath, file);
+        
+        if (uploadError) throw uploadError;
+        
+        // Update the application with the file URL
+        const { error: updateError } = await supabase
+          .from('lp_applications')
+          .update({ file_url: filePath })
+          .eq('id', applicationData.id);
+        
+        if (updateError) throw updateError;
+      }
+      
       toast.success('Your application has been submitted!');
       setFormData({ name: '', email: '', company: '', website: '', phone: '', description: '' });
       setFileName('');
+      setFile(null);
       setIsOpen(false);
+    } catch (error: any) {
+      console.error('Error submitting application:', error);
+      toast.error('Error submitting application', {
+        description: error.message || 'Please try again later.'
+      });
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
   
   return (
