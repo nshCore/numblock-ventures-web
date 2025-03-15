@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, User } from 'lucide-react';
+import { Menu, X, User, LogOut } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
@@ -8,15 +8,18 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAuth } from '@/context/AuthContext';
 
 const NavBar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { user, signOut } = useAuth();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -59,6 +62,18 @@ const NavBar: React.FC = () => {
     setContactOpen(false);
     contactForm.reset();
   };
+
+  const handleAuthAction = () => {
+    if (user) {
+      if (location.pathname === '/dashboard') {
+        signOut();
+      } else {
+        navigate('/dashboard');
+      }
+    } else {
+      navigate('/login');
+    }
+  };
   
   return (
     <>
@@ -84,7 +99,7 @@ const NavBar: React.FC = () => {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
+            {location.pathname === '/' && navLinks.map((link) => (
               <a 
                 key={link.name}
                 href={link.href}
@@ -94,23 +109,41 @@ const NavBar: React.FC = () => {
               </a>
             ))}
             
-            {/* Contact Button */}
-            <button 
-              onClick={() => setContactOpen(true)}
-              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors link-underline py-1"
-            >
-              Contact
-            </button>
+            {/* Contact Button - only show on home page */}
+            {location.pathname === '/' && (
+              <button 
+                onClick={() => setContactOpen(true)}
+                className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors link-underline py-1"
+              >
+                Contact
+              </button>
+            )}
             
-            {/* Login Button */}
+            {/* Login/Dashboard Button */}
             <Button
               variant="outline"
               size="sm"
               className="ml-4"
-              onClick={() => navigate('/login')}
+              onClick={handleAuthAction}
             >
-              <User className="mr-2 h-4 w-4" />
-              LP Login
+              {user ? (
+                location.pathname === '/dashboard' ? (
+                  <>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </>
+                ) : (
+                  <>
+                    <User className="mr-2 h-4 w-4" />
+                    Dashboard
+                  </>
+                )
+              ) : (
+                <>
+                  <User className="mr-2 h-4 w-4" />
+                  LP Login
+                </>
+              )}
             </Button>
           </div>
           
@@ -134,7 +167,7 @@ const NavBar: React.FC = () => {
                     </span>
                   </div>
                   <nav className="flex flex-col space-y-6 px-4">
-                    {navLinks.map((link) => (
+                    {location.pathname === '/' && navLinks.map((link) => (
                       <a 
                         key={link.name}
                         href={link.href}
@@ -143,21 +176,39 @@ const NavBar: React.FC = () => {
                         {link.name}
                       </a>
                     ))}
-                    <button
-                      onClick={() => {
-                        setContactOpen(true);
-                      }}
-                      className="text-lg font-medium text-foreground hover:text-primary transition-colors text-left"
-                    >
-                      Contact
-                    </button>
+                    {location.pathname === '/' && (
+                      <button
+                        onClick={() => {
+                          setContactOpen(true);
+                        }}
+                        className="text-lg font-medium text-foreground hover:text-primary transition-colors text-left"
+                      >
+                        Contact
+                      </button>
+                    )}
                     <Button
                       variant="outline"
                       className="justify-start"
-                      onClick={() => navigate('/login')}
+                      onClick={handleAuthAction}
                     >
-                      <User className="mr-2 h-4 w-4" />
-                      LP Login
+                      {user ? (
+                        location.pathname === '/dashboard' ? (
+                          <>
+                            <LogOut className="mr-2 h-4 w-4" />
+                            Logout
+                          </>
+                        ) : (
+                          <>
+                            <User className="mr-2 h-4 w-4" />
+                            Dashboard
+                          </>
+                        )
+                      ) : (
+                        <>
+                          <User className="mr-2 h-4 w-4" />
+                          LP Login
+                        </>
+                      )}
                     </Button>
                   </nav>
                 </div>

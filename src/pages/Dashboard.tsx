@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
@@ -19,13 +18,13 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { Home, PieChart, DollarSign, BarChart3, Settings, LogOut, BarChart, Info } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 const Dashboard: React.FC = () => {
-  const navigate = useNavigate();
+  const { profile, signOut } = useAuth();
   
   const handleLogout = () => {
-    // In a real app, this would call your auth service's logout method
-    navigate('/');
+    signOut();
   };
 
   return (
@@ -101,7 +100,7 @@ const Dashboard: React.FC = () => {
           
           <SidebarFooter className="p-4">
             <div className="text-sm text-muted-foreground">
-              Logged in as: <span className="font-medium">investor@example.com</span>
+              Logged in as: <span className="font-medium">{profile?.email || 'Loading...'}</span>
             </div>
           </SidebarFooter>
         </Sidebar>
@@ -121,7 +120,7 @@ const Dashboard: React.FC = () => {
           
           <div className="pt-16">
             <div className="mb-8">
-              <h2 className="text-3xl font-bold mb-2">Welcome, Investor</h2>
+              <h2 className="text-3xl font-bold mb-2">Welcome, {profile?.full_name || 'Investor'}</h2>
               <p className="text-muted-foreground">
                 Here's a summary of your investment performance
               </p>
@@ -131,11 +130,11 @@ const Dashboard: React.FC = () => {
               <Card>
                 <CardHeader className="pb-2">
                   <CardDescription>Total Investment</CardDescription>
-                  <CardTitle className="text-3xl">$250,000</CardTitle>
+                  <CardTitle className="text-3xl">${profile?.investment_amount?.toLocaleString() || '250,000'}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">
-                    Initial investment: $200,000
+                    Initial investment: ${profile?.initial_investment?.toLocaleString() || '200,000'}
                   </div>
                 </CardContent>
               </Card>
@@ -143,11 +142,11 @@ const Dashboard: React.FC = () => {
               <Card>
                 <CardHeader className="pb-2">
                   <CardDescription>Current Value</CardDescription>
-                  <CardTitle className="text-3xl">$312,500</CardTitle>
+                  <CardTitle className="text-3xl">${profile?.current_value?.toLocaleString() || '312,500'}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-green-500 font-medium">
-                    +$62,500 (+25%)
+                    +${(profile?.current_value - profile?.investment_amount)?.toLocaleString() || '62,500'} ({profile?.annual_roi || '25'}%)
                   </div>
                 </CardContent>
               </Card>
@@ -155,7 +154,7 @@ const Dashboard: React.FC = () => {
               <Card>
                 <CardHeader className="pb-2">
                   <CardDescription>Annual ROI</CardDescription>
-                  <CardTitle className="text-3xl">18.2%</CardTitle>
+                  <CardTitle className="text-3xl">{profile?.annual_roi || '18.2'}%</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-green-500 font-medium">
@@ -167,7 +166,7 @@ const Dashboard: React.FC = () => {
               <Card>
                 <CardHeader className="pb-2">
                   <CardDescription>LP Share</CardDescription>
-                  <CardTitle className="text-3xl">5.3%</CardTitle>
+                  <CardTitle className="text-3xl">{profile?.lp_share || '5.3'}%</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">

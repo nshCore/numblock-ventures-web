@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
@@ -16,6 +17,29 @@ const loginSchema = z.object({
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Check if user is already logged in
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        navigate('/dashboard');
+      }
+    };
+    
+    checkSession();
+    
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        navigate('/dashboard');
+      }
+    });
+    
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [navigate]);
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -28,25 +52,25 @@ const Login: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      // In a real app, this would call your API to send a passwordless login link
-      console.log("Sending login link to:", data.email);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      toast.success("Login link sent! Please check your email.", {
-        description: "We've sent a login link to your email address.",
+      const { error } = await supabase.auth.signInWithOtp({
+        email: data.email,
+        options: {
+          emailRedirectTo: window.location.origin + '/dashboard',
+        }
       });
       
-      // For demo purposes, we'll just navigate to the dashboard
-      // In a real app, the user would click the link in their email
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 3000);
+      if (error) {
+        throw error;
+      }
       
-    } catch (error) {
+      toast.success("Login link sent! Please check your email.", {
+        description: "We've sent a magic link to your email address.",
+      });
+      
+    } catch (error: any) {
+      console.error('Login error:', error);
       toast.error("Failed to send login link", {
-        description: "Please try again later.",
+        description: error.message || "Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
